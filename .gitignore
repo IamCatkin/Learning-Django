@@ -15,3 +15,4 @@ build
 db.sqlite3
 /.idea/
 fabfile.py
+/static/
