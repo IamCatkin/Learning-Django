@@ -12,6 +12,6 @@ dist
 build
 
 # My configurations:
-db.sqlite3.idea
+db.sqlite3
 /.idea/
 fabfile.py
