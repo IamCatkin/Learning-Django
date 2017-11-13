@@ -85,9 +85,6 @@ class Post(models.Model):
         self.views += 1
         self.save(update_fields=['views'])
 
-    class Meta:
-        ordering = ['-created_time']
-
     def save(self, *args, **kwargs):
         # 如果没有填写摘要
         if not self.excerpt:
@@ -102,4 +99,8 @@ class Post(models.Model):
             self.excerpt = strip_tags(md.convert(self.body))[:54]
         # 调用父类的 save 方法将数据保存到数据库中
         super(Post, self).save(*arg,**kwargs)
+
+    class Meta:
+        ordering = ['-created_time']
+
 # Create your models here.
