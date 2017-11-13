@@ -97,26 +97,26 @@ class IndexView(ListView):
             if right[-1] < total_pages:
                 last = True
 
-        if page_number == total_pages ==2:
-            # 如果用户请求的是第二页的数据，且总页数为2。
-            first = True
-
         elif page_number == total_pages:
             # 如果用户请求的是最后一页的数据，那么当前页右边就不需要数据，因此 right=[]（已默认为空），
             # 此时只要获取当前页左边的连续页码号。
             # 比如分页页码列表是 [1, 2, 3, 4]，那么获取的就是 left = [2, 3]
             # 这里只获取了当前页码后连续两个页码，你可以更改这个数字以获取更多页码。
-            left = page_range[(page_number - 3) if (page_number - 3) > 0 else 0:page_number - 1]
-
-            # 如果最左边的页码号比第 2 页页码号还大，
-            # 说明最左边的页码号和第 1 页的页码号之间还有其它页码，因此需要显示省略号，通过 left_has_more 来指示。
-            if left[0] > 2:
-                left_has_more = True
-
-            # 如果最左边的页码号比第 1 页的页码号大，说明当前页左边的连续页码号中不包含第一页的页码，
-            # 所以需要显示第一页的页码号，通过 first 来指示
-            if left[0] > 1:
+            if page_number == 2:
                 first = True
+
+            else:
+                left = page_range[(page_number - 3) if (page_number - 3) > 0 else 0:page_number - 1]
+
+                # 如果最左边的页码号比第 2 页页码号还大，
+                # 说明最左边的页码号和第 1 页的页码号之间还有其它页码，因此需要显示省略号，通过 left_has_more 来指示。
+                if left[0] > 2:
+                    left_has_more = True
+
+                # 如果最左边的页码号比第 1 页的页码号大，说明当前页左边的连续页码号中不包含第一页的页码，
+                # 所以需要显示第一页的页码号，通过 first 来指示
+                if left[0] > 1:
+                    first = True
         else:
             # 用户请求的既不是最后一页，也不是第 1 页，则需要获取当前页左右两边的连续页码号，
             # 这里只获取了当前页码前后连续两个页码，你可以更改这个数字以获取更多页码。
