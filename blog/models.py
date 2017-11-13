@@ -98,7 +98,7 @@ class Post(models.Model):
             # 从文本摘取前 54 个字符赋给 excerpt
             self.excerpt = strip_tags(md.convert(self.body))[:54]
         # 调用父类的 save 方法将数据保存到数据库中
-        super(Post, self).save(*arg,**kwargs)
+        super(Post, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['-created_time']
