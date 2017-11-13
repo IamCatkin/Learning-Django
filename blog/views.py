@@ -97,6 +97,10 @@ class IndexView(ListView):
             if right[-1] < total_pages:
                 last = True
 
+        if page_number == total_pages ==2:
+            # 如果用户请求的是第二页的数据，且总页数为2。
+            first = True
+
         elif page_number == total_pages:
             # 如果用户请求的是最后一页的数据，那么当前页右边就不需要数据，因此 right=[]（已默认为空），
             # 此时只要获取当前页左边的连续页码号。
