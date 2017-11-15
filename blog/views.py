@@ -3,6 +3,8 @@ from django.shortcuts import render,get_object_or_404
 from django.views.generic import ListView, DeleteView
 from comments.forms import CommentForm
 from .models import Post, Category, Tag
+from django.utils.text import slugify
+from markdown.extensions.toc import TocExtension
 
 class IndexView(ListView):
     model = Post
@@ -170,7 +172,8 @@ class PostDetailView(DeleteView):
         md = markdown.Markdown(extensions=[
             'markdown.extensions.extra',
             'markdown.extensions.codehilite',
-            'markdown.extensions.toc',
+            # 记得在顶部引入 TocExtension 和 slugify
+            TocExtension(slugify=slugify)
         ])
         post.body = md.convert(post.body)
         post.toc = md.toc
