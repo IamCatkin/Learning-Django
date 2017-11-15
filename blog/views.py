@@ -222,7 +222,7 @@ class TagView(ListView):
         tag = get_object_or_404(Tag,pk=self.kwargs.get('pk'))
         return super(TagView,self).get_queryset().filter(tags=tag)
 
-def Search(request):
+def search(request):
     q = request.GET.get('q')
     error_msg = ''
 
